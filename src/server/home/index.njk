@@ -1,0 +1,24 @@
+{% extends 'layouts/page.njk' %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">
+        This is a demonstration of the <strong>forms-engine-plugin</strong>, a Hapi.js plugin for
+        rendering and processing GOV.UK-style forms.
+      </p>
+
+      <h2 class="govuk-heading-m">Create CPH</h2>
+      <p class="govuk-body">
+        A copy of the production CPH form for local development
+      </p>
+      <ul class="govuk-list">
+        <li><a class="govuk-link" href="/apply-for-a-county-parish-holding-cph-number/you-must-be-18-or-older-to-use-this-service">Launch form</a></li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}
