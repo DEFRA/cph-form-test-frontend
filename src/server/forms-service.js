@@ -1,9 +1,9 @@
 import Boom from '@hapi/boom'
 import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs'
-
 import { config } from '~/src/config/config.js'
-
 import cphDefinition from './forms/apply-for-a-county-parish-holding-cph-number.json' with { type: 'json' }
+import { checkFormStatus } from '@defra/forms-engine-plugin/engine/helpers.js'
+import { getFormatter } from '@defra/forms-engine-plugin/engine/outputFormatters/index.js'
 
 /**
  * @import { FormStatus } from '@defra/forms-engine-plugin/types'
@@ -73,30 +73,39 @@ const sqsClient = new SQSClient({
 
 const formSubmissionService = {
   persistFiles: () => Promise.resolve({}),
-  submit: async (/** @type {SubmitPayload} */ data) => {
-    const messageData = {
-      meta: {
-        referenceNumber: `ref-${new Date().toISOString()}`,
-        ...data
-      }
-    }
+  submit: () =>
+    Promise.resolve({
+      message: 'OK',
+      result: { files: { main: '', repeaters: {} } }
+    })
+}
+
+const outputService = {
+  submit: async (
+    context,
+    request,
+    model,
+    _emailAddress,
+    items,
+    submitResponse,
+    formMetadata
+  ) => {
+    const format = getFormatter('adapter', '1')
 
     await sqsClient.send(
       new SendMessageCommand({
         QueueUrl: config.get('sqs.formSubmissionQueueUrl'),
-        MessageBody: JSON.stringify(messageData)
+        MessageBody: format(
+          context,
+          items,
+          model,
+          submitResponse,
+          checkFormStatus(request.params),
+          formMetadata
+        )
       })
     )
-
-    return {
-      message: 'OK',
-      result: { files: { main: '', repeaters: {} } }
-    }
   }
-}
-
-const outputService = {
-  submit: () => Promise.resolve()
 }
 
 export default { formsService, formSubmissionService, outputService }
