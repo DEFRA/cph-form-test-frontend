@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom'
 import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs'
 import { config } from '~/src/config/config.js'
-import cphDefinition from './forms/apply-for-a-county-parish-holding-cph-number.json' with { type: 'json' }
+import cphDefinition from './forms/apply-for-a-county-parish-holding-cph-number-dev.json' with { type: 'json' }
 import { checkFormStatus } from '@defra/forms-engine-plugin/engine/helpers.js'
 import { getFormatter } from '@defra/forms-engine-plugin/engine/outputFormatters/index.js'
 
