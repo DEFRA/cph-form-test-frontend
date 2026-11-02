@@ -6373,7 +6373,7 @@
     {
       "title": "Check your answers",
       "path": "/summary",
-      "controller": "SummaryPageWithConfirmationEmailController",
+      "controller": "SummaryPageController",
       "components": [
         {
           "id": "b134c585-0609-4798-bd69-b3f39c540b56",

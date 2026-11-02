@@ -47,6 +47,18 @@ The Defra Form Designer should be periodically checked for updates to the form. 
 11 Sep 2026 by Steven Thomas
 ```
 
+There is one change needed when updating the form definition with a new download. 
+
+Replace
+'''json
+"controller": "SummaryPageWithConfirmationEmailController",
+'''
+
+with
+'''
+"controller": "SummaryPageController",
+'''
+
 With additional work, it may be possible to retrieve the form definition through the API.
 
 Form IDs:
