@@ -38,7 +38,7 @@ The CPH form definition is obtained from the [Defra Forms Designer](https://form
 The downloaded form definition should be stored in the following location:
 
 ```text
-src/server/forms/apply-for-a-county-parish-holding-cph-number.json
+src/server/forms/apply-for-a-county-parish-holding-cph-number-dev.json
 ```
 
 The Defra Form Designer should be periodically checked for updates to the form. The current form was last updated on:
